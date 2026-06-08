@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>تمكَن · دعوة لزيارة جناحنا في معرض إنجاز 2026</title>
+  <meta name="description" content="دعوة لزيارة جناح فريق مشروع تمكَن في معرض إنجاز 2026 بجامعة أم القرى — بوث AI-F-3، قاعة الملك عبد العزيز.">
+  <meta name="theme-color" content="#02141a">
+  <meta property="og:title" content="تمكَن · دعوة لزيارة جناحنا">
+  <meta property="og:description" content="بوث AI-F-3 · الثلاثاء 9 يونيو 2026 · قاعة الملك عبد العزيز">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #02141a;
+      --teal: #1abba8;
+      --teal-bright: #6fe8c4;
+      --green-accent: #6fdb4a;
+      --detect: #6fff9c;
+      --rec: #ff3b30;
+      --text: #e8f5f0;
+      --text-muted: #c8e8d8;
+      --text-faint: rgba(200, 232, 216, 0.5);
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============ SCENE (dashcam POV background) ============ */
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .sky {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(to bottom,
+        #020a10 0%,
+        #062028 40%,
+        #0a3a38 75%,
+        #105244 100%);
+    }
+
+    .horizon-glow {
+      position: absolute;
+      top: 35%; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(26, 200, 170, 0.5),
+        rgba(111, 219, 74, 0.4),
+        transparent);
+      filter: blur(0.5px);
+    }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center,
+        transparent 30%,
+        rgba(0, 0, 0, 0.4) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .stars {
+      position: absolute;
+      top: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90vw;
+      height: 80px;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #b8e8d4;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+    .star:nth-child(1) { left: 10%; top: 20px; animation-delay: 0s; }
+    .star:nth-child(2) { left: 22%; top: 45px; animation-delay: 0.6s; }
+    .star:nth-child(3) { left: 38%; top: 8px; animation-delay: 1.2s; }
+    .star:nth-child(4) { left: 51%; top: 38px; animation-delay: 1.8s; }
+    .star:nth-child(5) { left: 64%; top: 18px; animation-delay: 2.4s; }
+    .star:nth-child(6) { left: 78%; top: 52px; animation-delay: 3s; }
+    .star:nth-child(7) { left: 90%; top: 28px; animation-delay: 3.6s; }
+
+    .road-container {
+      position: absolute;
+      top: 50%; bottom: 110px;
+      left: 0; right: 0;
+      overflow: hidden;
+    }
+
+    .road {
+      position: absolute;
+      top: -50%; bottom: 0;
+      left: 0; right: 0;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        #051a1c 25%,
+        #0a2426 100%);
+      transform: perspective(320px) rotateX(65deg);
+      transform-origin: 50% 100%;
+    }
+
+    .dashed-line {
+      position: absolute;
+      left: calc(50% - 5px);
+      top: -100%;
+      width: 10px;
+      height: 300%;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--teal-bright) 0 50px,
+        transparent 50px 130px);
+      animation: dashScroll 0.6s linear infinite;
+      box-shadow: 0 0 12px rgba(111, 232, 196, 0.5);
+    }
+
+    .edge-line {
+      position: absolute;
+      top: -100%;
+      width: 5px;
+      height: 300%;
+      background: rgba(180, 220, 200, 0.5);
+    }
+    .edge-line.left { left: 7%; }
+    .edge-line.right { right: 7%; }
+
+    /* car on the road, with detection bounding box wrapping it */
+    .detected-car {
+      position: absolute;
+      bottom: 145px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 78px;
+      z-index: 2;
+      animation: carBob 4s ease-in-out infinite;
+    }
+
+    .detected-car .car-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .bbox-overlay {
+      position: absolute;
+      inset: -6px -8px -2px -8px;
+      border: 1.5px solid var(--detect);
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(111, 255, 156, 0.35);
+      animation: bboxPulse 2.5s ease-in-out infinite;
+    }
+
+    .bbox-label {
+      position: absolute;
+      top: -20px;
+      left: -1.5px;
+      background: var(--detect);
+      color: #002010;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 7px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      border-radius: 1px;
+      direction: ltr;
+    }
+
+    /* distant smaller car-hint */
+    .distant-detection {
+      position: absolute;
+      bottom: 245px;
+      left: calc(50% - 90px);
+      width: 36px;
+      height: 22px;
+      border: 1px solid var(--detect);
+      border-radius: 1px;
+      opacity: 0.6;
+      box-shadow: 0 0 6px rgba(111, 255, 156, 0.25);
+      animation: bboxPulse 2.5s ease-in-out infinite;
+      animation-delay: 0.8s;
+      z-index: 2;
+    }
+    .distant-detection::before {
+      content: 'CAR 0.78';
+      position: absolute;
+      top: -14px;
+      left: -1px;
+      background: var(--detect);
+      color: #002010;
+      font-family: var(--mono);
+      font-size: 8px;
+      padding: 1px 4px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    /* dashboard silhouette */
+    .dashboard {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, #000 0%, #050a0c 60%, transparent 100%);
+      z-index: 3;
+    }
+
+    .dashboard::before {
+      content: '';
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(360px, 80vw);
+      height: 110px;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      background: #020608;
+      border-top: 1px solid rgba(26, 187, 168, 0.25);
+    }
+
+    .hud-dashboard {
+      position: absolute;
+      bottom: 24px;
+      font-family: var(--mono);
+      letter-spacing: 1.2px;
+      z-index: 4;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .hud-dashboard.left { left: 20px; }
+    .hud-dashboard.right { right: 20px; direction: ltr; }
+    .hud-dashboard .value {
+      font-size: 22px;
+      color: var(--teal-bright);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .hud-dashboard .unit {
+      font-size: 11px;
+      color: var(--teal);
+      opacity: 0.75;
+      font-weight: 500;
+    }
+    .hud-dashboard.right .value { font-size: 14px; }
+
+    .hud-top {
+      position: absolute;
+      top: 16px; left: 18px;
+      display: flex;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      direction: ltr;
+      z-index: 4;
+    }
+
+    .rec {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rec-dot {
+      width: 8px; height: 8px;
+      background: var(--rec);
+      border-radius: 50%;
+      animation: blink 1s infinite;
+      box-shadow: 0 0 6px rgba(255, 59, 48, 0.6);
+    }
+
+    /* ============ CONTENT ============ */
+    .content {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 140px;
+    }
+
+    .card {
+      background: rgba(2, 20, 26, 0.85);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border: 1px solid rgba(26, 187, 168, 0.32);
+      border-radius: 16px;
+      padding: 30px 32px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 12px 50px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(26, 187, 168, 0.08),
+        inset 0 1px 0 rgba(111, 232, 196, 0.08);
+      animation: cardIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .logo {
+      width: 64px;
+      height: auto;
+      filter: drop-shadow(0 0 12px rgba(26, 187, 168, 0.3));
+    }
+
+    .card h1 {
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--teal-bright);
+      letter-spacing: 1px;
+      line-height: 1;
+      text-shadow: 0 0 24px rgba(111, 232, 196, 0.25);
+    }
+
+    .tagline {
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      font-family: var(--mono);
+      direction: ltr;
+      text-transform: uppercase;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(26, 187, 168, 0.45),
+        transparent);
+      margin: 0 0 18px;
+    }
+
+    .description {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text);
+      opacity: 0.92;
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    .description strong {
+      color: var(--teal-bright);
+      font-weight: 600;
+    }
+
+    /* booth info card */
+    .booth-info {
+      background: rgba(26, 187, 168, 0.06);
+      border: 1px solid rgba(26, 187, 168, 0.22);
+      border-radius: 12px;
+      padding: 18px 18px 16px;
+      text-align: right;
+      margin-bottom: 18px;
+    }
+
+    .booth-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(26, 187, 168, 0.2);
+    }
+
+    .booth-label {
+      font-size: 11px;
+      color: var(--teal);
+      letter-spacing: 1.5px;
+      font-family: var(--mono);
+      direction: ltr;
+      opacity: 0.85;
+    }
+
+    .booth-number {
+      background: linear-gradient(135deg, var(--teal), var(--green-accent));
+      color: #02141a;
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 14px rgba(26, 187, 168, 0.3);
+    }
+
+    .booth-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .booth-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .booth-row .icon {
+      width: 18px;
+      height: 18px;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .footer {
+      font-size: 11px;
+      color: var(--text-faint);
+      letter-spacing: 0.5px;
+      padding-top: 4px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(26, 187, 168, 0.2),
+        transparent);
+      margin: 0 0 14px;
+    }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes dashScroll {
+      from { transform: translateY(0); }
+      to { transform: translateY(130px); }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.15; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+
+    @keyframes bboxPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes carBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-1.5px); }
+    }
+
+    /* ============ RESPONSIVE (mobile-first refinements) ============ */
+    @media (max-width: 600px) {
+      .card {
+        padding: 24px 22px;
+        border-radius: 14px;
+      }
+      .card h1 { font-size: 36px; }
+      .logo { width: 50px; }
+      .tagline { font-size: 9px; letter-spacing: 1.5px; }
+      .description { font-size: 14px; line-height: 1.8; }
+      .booth-number { font-size: 14px; padding: 5px 11px; }
+      .booth-row { font-size: 13px; }
+      .hud-top { font-size: 10px; letter-spacing: 1.2px; }
+      .hud-dashboard .value { font-size: 18px; }
+      .hud-dashboard.right .value { font-size: 12px; }
+      .hud-dashboard .unit { font-size: 10px; }
+      .hud-dashboard.left { left: 14px; }
+      .hud-dashboard.right { right: 14px; }
+      .detected-car { width: 90px; height: 58px; bottom: 138px; }
+      .bbox-label { font-size: 9px; padding: 1.5px 6px; }
+      .distant-detection { bottom: 215px; width: 28px; height: 18px; left: calc(50% - 70px); }
+      .distant-detection::before { font-size: 7px; padding: 1px 3px; top: -12px; }
+      .content { padding: 64px 16px 130px; }
+    }
+
+    @media (max-width: 380px) {
+      .card { padding: 20px 18px; }
+      .card h1 { font-size: 32px; }
+      .card-header { gap: 10px; }
+      .description { font-size: 13px; }
+      .booth-info { padding: 14px; }
+      .hud-top { font-size: 9px; letter-spacing: 1px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dashed-line, .bbox-overlay, .distant-detection, .rec-dot,
+      .star, .card, .detected-car { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dashcam POV scene (decorative) -->
+  <div class="scene" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="stars">
+      <div class="star"></div><div class="star"></div><div class="star"></div>
+      <div class="star"></div><div class="star"></div><div class="star"></div>
+      <div class="star"></div>
+    </div>
+    <div class="horizon-glow"></div>
+
+    <div class="road-container">
+      <div class="road">
+        <div class="dashed-line"></div>
+        <div class="edge-line left"></div>
+        <div class="edge-line right"></div>
+      </div>
+    </div>
+
+    <!-- distant car-hint, just a smaller floating bbox -->
+    <div class="distant-detection"></div>
+
+    <!-- main detected car on the road -->
+    <div class="detected-car">
+      <svg class="car-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a3438"/>
+            <stop offset="100%" stop-color="#0f1618"/>
+          </linearGradient>
+          <radialGradient id="tailLight" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#ff6060"/>
+            <stop offset="60%" stop-color="#cc2020"/>
+            <stop offset="100%" stop-color="#881010"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ground shadow -->
+        <ellipse cx="60" cy="76" rx="46" ry="3" fill="rgba(0,0,0,0.55)"/>
+
+        <!-- car body -->
+        <path d="M 14 64 L 18 32 Q 20 24 30 24 L 90 24 Q 100 24 102 32 L 106 64 Q 106 70 100 70 L 20 70 Q 14 70 14 64 Z"
+              fill="url(#bodyGrad)" stroke="#050a0c" stroke-width="0.8"/>
+
+        <!-- roof highlight -->
+        <path d="M 22 30 Q 24 26 28 26 L 92 26 Q 96 26 98 30 L 96 30 Q 94 28 90 28 L 30 28 Q 26 28 24 30 Z"
+              fill="rgba(111, 232, 196, 0.08)"/>
+
+        <!-- rear window -->
+        <path d="M 30 30 Q 33 26 38 26 L 82 26 Q 87 26 90 30 L 87 46 L 33 46 Z"
+              fill="#020608" opacity="0.9"/>
+
+        <!-- window reflection -->
+        <path d="M 35 30 L 50 30 L 46 44 L 39 44 Z" fill="rgba(111, 232, 196, 0.06)"/>
+
+        <!-- trim line -->
+        <line x1="20" y1="50" x2="100" y2="50" stroke="#050a0c" stroke-width="0.6" opacity="0.7"/>
+
+        <!-- left tail light -->
+        <rect x="16" y="53" width="15" height="9" rx="2" fill="url(#tailLight)"/>
+        <rect x="17" y="54" width="13" height="3" rx="1" fill="#ffaaaa" opacity="0.6"/>
+
+        <!-- right tail light -->
+        <rect x="89" y="53" width="15" height="9" rx="2" fill="url(#tailLight)"/>
+        <rect x="90" y="54" width="13" height="3" rx="1" fill="#ffaaaa" opacity="0.6"/>
+
+        <!-- license plate -->
+        <rect x="48" y="56" width="24" height="7" rx="0.8" fill="#e8e0d0" stroke="#222" stroke-width="0.3"/>
+        <text x="60" y="61" text-anchor="middle" font-size="4" font-family="monospace" fill="#222" font-weight="700">AI-F-3</text>
+
+        <!-- exhaust hint -->
+        <rect x="36" y="68" width="6" height="2" rx="0.5" fill="#050a0c"/>
+        <rect x="78" y="68" width="6" height="2" rx="0.5" fill="#050a0c"/>
+      </svg>
+
+      <div class="bbox-overlay">
+        <span class="bbox-label">CAR 0.94</span>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <div class="hud-dashboard left">
+        <span class="value">68</span>
+        <span class="unit">km/h</span>
+      </div>
+      <div class="hud-dashboard right">
+        <span class="value">11.0 FPS</span>
+        <span class="unit">· PIPELINE</span>
+      </div>
+    </div>
+
+    <div class="hud-top">
+      <div class="rec">
+        <span class="rec-dot"></span>
+        <span>REC · TAMAKKAN-OS</span>
+      </div>
+    </div>
+
+    <div class="vignette"></div>
+  </div>
+
+  <!-- Invitation content -->
+  <div class="content">
+    <main class="card">
+
+      <div class="card-header">
+        <img src="logo.png" alt="" class="logo">
+        <h1>تمكَن</h1>
+      </div>
+      <div class="tagline">AI Driving Safety · UQU</div>
+
+      <div class="divider"></div>
+
+      <p class="description">
+        يسر فريق مشروع <strong>تمكَن</strong> بدعوتكم لزيارتنا في
+        <strong>معرض إنجاز 2026</strong>،
+        حيث نستعرض نظامًا لتحليل القيادة.
+      </p>
+
+      <section class="booth-info" aria-label="تفاصيل الجناح">
+        <div class="booth-header">
+          <span class="booth-label">BOOTH</span>
+          <span class="booth-number">AI-F-3</span>
+        </div>
+        <div class="booth-details">
+          <div class="booth-row">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2"/>
+              <path d="M16 3v4M8 3v4M3 11h18"/>
+            </svg>
+            <span>الثلاثاء، 9 يونيو 2026</span>
+          </div>
+          <div class="booth-row">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <polyline points="12 7 12 12 15 14"/>
+            </svg>
+            <span>11:30 صباحًا — 1:00 ظهرًا</span>
+          </div>
+          <div class="booth-row">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s-8-7.5-8-13a8 8 0 0 1 16 0c0 5.5-8 13-8 13z"/>
+              <circle cx="12" cy="9" r="3"/>
+            </svg>
+            <span>قاعة الملك عبد العزيز</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-divider"></div>
+      <div class="footer">
+        فريق مشروع تمكَن · جامعة أم القرى · 2026
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
