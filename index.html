@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>تَمكُّن · دعوة لزيارة جناحنا في ملتقى المهنة والابتكار 2026</title>
+  <meta name="description" content="دعوة لزيارة جناح فريق تَمكُّن في ملتقى المهنة والابتكار 2026 بجامعة أم القرى — بوث AI-F-3، قاعة الملك عبد العزيز.">
+  <meta name="theme-color" content="#02141a">
+  <meta property="og:title" content="تَمكُّن · دعوة لزيارة جناحنا">
+  <meta property="og:description" content="بوث AI-F-3 · الثلاثاء 9 يونيو 2026 · قاعة الملك عبد العزيز">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #02141a;
+      --teal: #1abba8;
+      --teal-bright: #6fe8c4;
+      --green-accent: #6fdb4a;
+      --detect: #6fff9c;
+      --rec: #ff3b30;
+      --text: #e8f5f0;
+      --text-muted: #c8e8d8;
+      --text-faint: rgba(200, 232, 216, 0.5);
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============ SCENE (dashcam POV background) ============ */
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .sky {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(to bottom,
+        #020a10 0%,
+        #062028 40%,
+        #0a3a38 75%,
+        #105244 100%);
+    }
+
+    .horizon-glow {
+      position: absolute;
+      top: 35%; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(26, 200, 170, 0.5),
+        rgba(111, 219, 74, 0.4),
+        transparent);
+      filter: blur(0.5px);
+    }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center,
+        transparent 30%,
+        rgba(0, 0, 0, 0.4) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .stars {
+      position: absolute;
+      top: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90vw;
+      height: 80px;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #b8e8d4;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+    .star:nth-child(1) { left: 10%; top: 20px; animation-delay: 0s; }
+    .star:nth-child(2) { left: 22%; top: 45px; animation-delay: 0.6s; }
+    .star:nth-child(3) { left: 38%; top: 8px; animation-delay: 1.2s; }
+    .star:nth-child(4) { left: 51%; top: 38px; animation-delay: 1.8s; }
+    .star:nth-child(5) { left: 64%; top: 18px; animation-delay: 2.4s; }
+    .star:nth-child(6) { left: 78%; top: 52px; animation-delay: 3s; }
+    .star:nth-child(7) { left: 90%; top: 28px; animation-delay: 3.6s; }
+
+    .road-container {
+      position: absolute;
+      top: 50%; bottom: 110px;
+      left: 0; right: 0;
+      overflow: hidden;
+    }
+
+    .road {
+      position: absolute;
+      top: -50%; bottom: 0;
+      left: 0; right: 0;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        #051a1c 25%,
+        #0a2426 100%);
+      transform: perspective(320px) rotateX(65deg);
+      transform-origin: 50% 100%;
+    }
+
+    .dashed-line {
+      position: absolute;
+      left: calc(50% - 5px);
+      top: -100%;
+      width: 10px;
+      height: 300%;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--teal-bright) 0 50px,
+        transparent 50px 130px);
+      animation: dashScroll 0.6s linear infinite;
+      box-shadow: 0 0 12px rgba(111, 232, 196, 0.5);
+    }
+
+    .edge-line {
+      position: absolute;
+      top: -100%;
+      width: 5px;
+      height: 300%;
+      background: rgba(180, 220, 200, 0.5);
+    }
+    .edge-line.left { left: 7%; }
+    .edge-line.right { right: 7%; }
+
+    /* dashboard silhouette */
+    .dashboard {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, #000 0%, #050a0c 60%, transparent 100%);
+      z-index: 3;
+    }
+
+    .dashboard::before {
+      content: '';
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(360px, 80vw);
+      height: 110px;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      background: #020608;
+      border-top: 1px solid rgba(26, 187, 168, 0.25);
+    }
+
+    .hud-dashboard {
+      position: absolute;
+      bottom: 22px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 1.5px;
+      z-index: 4;
+    }
+    .hud-dashboard.left { left: 20px; }
+    .hud-dashboard.right { right: 20px; text-align: left; direction: ltr; }
+    .hud-dashboard .label { opacity: 0.6; margin-bottom: 3px; }
+    .hud-dashboard .value { font-size: 18px; color: var(--teal-bright); font-weight: 600; }
+    .hud-dashboard .value.small { font-size: 13px; }
+
+    .hud-top {
+      position: absolute;
+      top: 16px; left: 18px; right: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      direction: ltr;
+      z-index: 4;
+    }
+
+    .rec {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rec-dot {
+      width: 8px; height: 8px;
+      background: var(--rec);
+      border-radius: 50%;
+      animation: blink 1s infinite;
+      box-shadow: 0 0 6px rgba(255, 59, 48, 0.6);
+    }
+
+    /* fake detection bounding boxes */
+    .bbox {
+      position: absolute;
+      border: 1.5px solid var(--detect);
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(111, 255, 156, 0.3);
+      animation: bboxPulse 3s ease-in-out infinite;
+      z-index: 2;
+    }
+    .bbox-label {
+      position: absolute;
+      top: -19px; left: -1px;
+      background: var(--detect);
+      color: #002010;
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 2px 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .bbox-1 { top: 38%; left: 32%; width: 70px; height: 44px; animation-delay: 0s; }
+    .bbox-2 { top: 41%; left: 56%; width: 55px; height: 34px; animation-delay: 1.2s; }
+    .bbox-3 { top: 36%; left: 18%; width: 38px; height: 24px; animation-delay: 2.1s; opacity: 0.7; }
+
+    /* ============ CONTENT ============ */
+    .content {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 140px;
+    }
+
+    .card {
+      background: rgba(2, 20, 26, 0.85);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border: 1px solid rgba(26, 187, 168, 0.32);
+      border-radius: 16px;
+      padding: 30px 32px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 12px 50px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(26, 187, 168, 0.08),
+        inset 0 1px 0 rgba(111, 232, 196, 0.08);
+      animation: cardIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .logo {
+      width: 64px;
+      height: auto;
+      filter: drop-shadow(0 0 12px rgba(26, 187, 168, 0.3));
+    }
+
+    .card h1 {
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--teal-bright);
+      letter-spacing: 1px;
+      line-height: 1;
+      text-shadow: 0 0 24px rgba(111, 232, 196, 0.25);
+    }
+
+    .tagline {
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      font-family: var(--mono);
+      direction: ltr;
+      text-transform: uppercase;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(26, 187, 168, 0.45),
+        transparent);
+      margin: 0 0 18px;
+    }
+
+    .description {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text);
+      opacity: 0.92;
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    .description strong {
+      color: var(--teal-bright);
+      font-weight: 600;
+    }
+
+    /* booth info card */
+    .booth-info {
+      background: rgba(26, 187, 168, 0.06);
+      border: 1px solid rgba(26, 187, 168, 0.22);
+      border-radius: 12px;
+      padding: 18px 18px 16px;
+      text-align: right;
+      margin-bottom: 22px;
+    }
+
+    .booth-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(26, 187, 168, 0.2);
+    }
+
+    .booth-label {
+      font-size: 11px;
+      color: var(--teal);
+      letter-spacing: 1.5px;
+      font-family: var(--mono);
+      direction: ltr;
+      opacity: 0.85;
+    }
+
+    .booth-number {
+      background: linear-gradient(135deg, var(--teal), var(--green-accent));
+      color: #02141a;
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 14px rgba(26, 187, 168, 0.3);
+    }
+
+    .booth-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .booth-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .booth-row .icon {
+      width: 18px;
+      height: 18px;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* countdown */
+    .countdown-label-top {
+      font-size: 11px;
+      color: var(--teal);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-family: var(--mono);
+      direction: ltr;
+      opacity: 0.7;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .countdown-cell {
+      background: rgba(2, 20, 26, 0.55);
+      border: 1px solid rgba(26, 187, 168, 0.18);
+      border-radius: 8px;
+      padding: 10px 4px;
+    }
+
+    .countdown-value {
+      font-family: var(--mono);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--teal-bright);
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      opacity: 0.8;
+    }
+
+    .live-message {
+      display: none;
+      background: rgba(111, 255, 156, 0.1);
+      border: 1px solid rgba(111, 255, 156, 0.35);
+      color: var(--detect);
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .live-message.active { display: block; animation: pulse-live 2s ease-in-out infinite; }
+
+    .footer {
+      font-size: 11px;
+      color: var(--text-faint);
+      letter-spacing: 0.5px;
+      padding-top: 4px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(26, 187, 168, 0.2),
+        transparent);
+      margin: 0 0 14px;
+    }
+
+    /* entrance animations */
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes dashScroll {
+      from { transform: translateY(0); }
+      to { transform: translateY(130px); }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.15; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+
+    @keyframes bboxPulse {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.97); }
+    }
+
+    @keyframes pulse-live {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(111, 255, 156, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(111, 255, 156, 0); }
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 600px) {
+      .card {
+        padding: 24px 22px;
+        border-radius: 14px;
+      }
+      .card h1 { font-size: 36px; }
+      .logo { width: 50px; }
+      .tagline { font-size: 9px; }
+      .description { font-size: 14px; line-height: 1.8; }
+      .booth-number { font-size: 14px; padding: 5px 11px; }
+      .booth-row { font-size: 13px; }
+      .countdown-value { font-size: 20px; }
+      .countdown-cell { padding: 8px 2px; }
+      .hud-top { font-size: 10px; }
+      .hud-dashboard { font-size: 9px; }
+      .hud-dashboard.left { left: 14px; }
+      .hud-dashboard.right { right: 14px; }
+      .hud-dashboard .value { font-size: 16px; }
+      .hud-dashboard .value.small { font-size: 11px; }
+      .bbox-2, .bbox-3 { display: none; }
+      .bbox-1 { width: 50px; height: 32px; left: 30%; }
+      .content { padding: 70px 16px 130px; }
+    }
+
+    @media (max-width: 380px) {
+      .card { padding: 20px 18px; }
+      .card h1 { font-size: 32px; }
+      .card-header { gap: 10px; }
+      .description { font-size: 13px; }
+      .booth-info { padding: 14px; }
+      .hud-top { font-size: 9px; letter-spacing: 1px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dashed-line, .bbox, .rec-dot, .star, .card { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dashcam POV scene (decorative) -->
+  <div class="scene" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="stars">
+      <div class="star"></div><div class="star"></div><div class="star"></div>
+      <div class="star"></div><div class="star"></div><div class="star"></div>
+      <div class="star"></div>
+    </div>
+    <div class="horizon-glow"></div>
+
+    <div class="road-container">
+      <div class="road">
+        <div class="dashed-line"></div>
+        <div class="edge-line left"></div>
+        <div class="edge-line right"></div>
+      </div>
+    </div>
+
+    <div class="bbox bbox-1"><span class="bbox-label">CAR 0.94</span></div>
+    <div class="bbox bbox-2"><span class="bbox-label">CAR 0.87</span></div>
+    <div class="bbox bbox-3"><span class="bbox-label">CAR 0.71</span></div>
+
+    <div class="dashboard">
+      <div class="hud-dashboard left">
+        <div class="label">SPEED · KMH</div>
+        <div class="value">68</div>
+      </div>
+      <div class="hud-dashboard right">
+        <div class="label">JETSON ORIN NX</div>
+        <div class="value small">11.0 FPS · YOLOv11s</div>
+      </div>
+    </div>
+
+    <div class="hud-top">
+      <div class="rec">
+        <span class="rec-dot"></span>
+        <span>REC · TAMAKKAN-OS</span>
+      </div>
+      <div id="clock">--:--:--</div>
+    </div>
+
+    <div class="vignette"></div>
+  </div>
+
+  <!-- Invitation content -->
+  <div class="content">
+    <main class="card">
+
+      <div class="card-header">
+        <img src="logo.png" alt="" class="logo">
+        <h1>تَمكُّن</h1>
+      </div>
+      <div class="tagline">AI Driving Safety · UQU</div>
+
+      <div class="divider"></div>
+
+      <p class="description">
+        يسرّنا فريق <strong>تَمكُّن</strong> دعوتكم لزيارة جناحنا في
+        <strong>ملتقى المهنة والابتكار 2026</strong>،
+        حيث نستعرض منظومة ذكاء اصطناعي لتحليل سلوك القيادة
+        ودعم تدريب السائقين في الزمن الحقيقي.
+      </p>
+
+      <section class="booth-info" aria-label="تفاصيل الجناح">
+        <div class="booth-header">
+          <span class="booth-label">BOOTH</span>
+          <span class="booth-number">AI-F-3</span>
+        </div>
+        <div class="booth-details">
+          <div class="booth-row">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2"/>
+              <path d="M16 3v4M8 3v4M3 11h18"/>
+            </svg>
+            <span>الثلاثاء، 9 يونيو 2026</span>
+          </div>
+          <div class="booth-row">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <polyline points="12 7 12 12 15 14"/>
+            </svg>
+            <span>11:30 صباحًا — 1:00 ظهرًا</span>
+          </div>
+          <div class="booth-row">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s-8-7.5-8-13a8 8 0 0 1 16 0c0 5.5-8 13-8 13z"/>
+              <circle cx="12" cy="9" r="3"/>
+            </svg>
+            <span>قاعة الملك عبد العزيز</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="countdown-label-top">Time until we go live</div>
+      <div class="countdown" id="countdown" role="timer" aria-live="polite">
+        <div class="countdown-cell">
+          <div class="countdown-value" id="cd-days">00</div>
+          <div class="countdown-label">يوم</div>
+        </div>
+        <div class="countdown-cell">
+          <div class="countdown-value" id="cd-hours">00</div>
+          <div class="countdown-label">ساعة</div>
+        </div>
+        <div class="countdown-cell">
+          <div class="countdown-value" id="cd-minutes">00</div>
+          <div class="countdown-label">دقيقة</div>
+        </div>
+        <div class="countdown-cell">
+          <div class="countdown-value" id="cd-seconds">00</div>
+          <div class="countdown-label">ثانية</div>
+        </div>
+      </div>
+
+      <div class="live-message" id="live-message">
+        ● نحن متواجدون الآن في الجناح — مرحبًا بكم!
+      </div>
+
+      <div class="footer-divider"></div>
+      <div class="footer">
+        فريق تَمكُّن · جامعة أم القرى · 2026
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      // ===== Live HUD clock =====
+      const clockEl = document.getElementById('clock');
+      function tickClock() {
+        const d = new Date();
+        clockEl.textContent = d.toTimeString().split(' ')[0];
+      }
+      setInterval(tickClock, 1000);
+      tickClock();
+
+      // ===== Countdown to booth opening =====
+      // June 9, 2026, 11:30 AM Saudi Arabia time (UTC+3)
+      const target = new Date('2026-06-09T11:30:00+03:00');
+      // Booth closes at 1:00 PM
+      const closeTime = new Date('2026-06-09T13:00:00+03:00');
+
+      const pad = n => String(n).padStart(2, '0');
+      const elDays = document.getElementById('cd-days');
+      const elHours = document.getElementById('cd-hours');
+      const elMins = document.getElementById('cd-minutes');
+      const elSecs = document.getElementById('cd-seconds');
+      const countdownBox = document.getElementById('countdown');
+      const liveBox = document.getElementById('live-message');
+      const cdLabel = document.querySelector('.countdown-label-top');
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = target - now;
+
+        if (diff <= 0 && now < closeTime) {
+          // Booth is currently live
+          countdownBox.style.display = 'none';
+          cdLabel.style.display = 'none';
+          liveBox.classList.add('active');
+          return;
+        }
+        if (now >= closeTime) {
+          // Event has ended
+          countdownBox.style.display = 'none';
+          cdLabel.textContent = 'Thanks for visiting!';
+          return;
+        }
+
+        let remaining = diff;
+        const days = Math.floor(remaining / 86400000); remaining -= days * 86400000;
+        const hours = Math.floor(remaining / 3600000); remaining -= hours * 3600000;
+        const minutes = Math.floor(remaining / 60000); remaining -= minutes * 60000;
+        const seconds = Math.floor(remaining / 1000);
+
+        elDays.textContent = pad(days);
+        elHours.textContent = pad(hours);
+        elMins.textContent = pad(minutes);
+        elSecs.textContent = pad(seconds);
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    })();
+  </script>
+
+</body>
+</html>
